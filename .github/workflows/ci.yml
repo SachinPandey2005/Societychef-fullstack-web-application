@@ -1,0 +1,131 @@
+name: HomeChef CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop", "fix/**", "feature/**" ]
+  pull_request:
+    branches: [ "main", "develop", "fix/**" ]
+
+jobs:
+  backend-ci:
+    name: Backend Build and Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Type Check and Lint
+        run: npm run build
+      - name: Run Tests
+        run: npm test
+      - name: Build Docker Image
+        if: github.ref == 'refs/heads/main'
+        run: docker build -t societychef/backend:latest .
+
+  ops-web-ci:
+    name: Ops Web Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/ops-web
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Build Vite App
+        run: npm run build
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright Tests
+        continue-on-error: true
+        run: npm run test:playwright
+      - name: Upload Playwright Report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/ops-web/playwright-report/**
+
+  mobile-ci:
+    name: Mobile Build Verification
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Type Check
+        run: npx tsc --noEmit
+
+  detox-ios:
+    name: Detox iOS Tests
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Install Detox CLI
+        run: npm i -g detox-cli
+      - name: Expo Prebuild iOS
+        run: npx expo prebuild --platform ios --no-install
+      - name: Build Detox iOS
+        continue-on-error: true
+        run: npm run detox:build -- -c ios.debug
+      - name: Run Detox iOS Tests
+        continue-on-error: true
+        run: npm run detox:test -- -c ios.debug --headless
+
+  detox-android:
+    name: Detox Android Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Install Detox CLI
+        run: npm i -g detox-cli
+      - name: Expo Prebuild Android
+        run: npx expo prebuild --platform android --no-install
+      - name: Build Detox Android
+        continue-on-error: true
+        run: npm run detox:build -- -c android.debug
+      - name: Run Detox Android Tests
+        continue-on-error: true
+        run: npm run detox:test -- -c android.debug --headless

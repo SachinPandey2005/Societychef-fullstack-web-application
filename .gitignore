@@ -1,0 +1,120 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Professional .gitignore for Society Chef Monorepo
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Dependencies & Package Managers
+node_modules/
+.pnp
+.pnp.js
+yarn-error.log*
+.pnpm-debug.log*
+
+# General Build & Transpilation Outputs
+dist/
+build/
+out/
+dist-ssr/
+web-build/
+*.tsbuildinfo
+
+# Caches & Packaging
+.cache/
+.parcel-cache/
+.turbo/
+.next/
+.eslintcache
+.nyc_output/
+
+# Logs & Temporary Files
+logs/
+*.log
+auth_debug.log
+npm-debug.log*
+yarn-debug.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+tmp/
+temp/
+*.tmp
+*.cache
+
+# Environment Configurations
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.development.local
+.env.production.local
+.env.test.local
+.env.*
+
+# EXPLICIT EXCEPTION: Track environment template
+!.env.example
+
+# Expo & Mobile Build Assets
+.expo/
+.expo-shared/
+android/app/build/
+android/build/
+ios/build/
+ios/Pods/
+ios/DerivedData/
+*.apk
+*.aab
+*.ipa
+
+# Supabase
+.supabase/
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Testing Reports
+playwright-report/
+test-results/
+coverage/
+
+# OS-Specific Metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+desktop.ini
+
+# IDE Configurations
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# EXPLICIT EXCEPTION: Track recommended extensions
+!.vscode/extensions.json
+
+# Production Credentials & Secrets Exclusions
+*google-services.json
+GoogleService-Info.plist
+*firebase-adminsdk*.json
+*service-account*.json
+google-play-service-account.json
+*.keystore
+*.jks
+*.p8
+*.p12
+*.pem
+*.key
+*.crt
+*.der
+
+# Graphify Local Machine Paths & Caches
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+graphify-out/cache/
+

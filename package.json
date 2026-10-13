@@ -1,0 +1,19 @@
+{
+  "name": "rasohi",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=apps/backend",
+    "dev:mobile": "npm run start --workspace=apps/mobile",
+    "dev:ops-web": "npm run dev --workspace=apps/ops-web",
+    "install:all": "npm install",
+    "graph:update": "graphify update .",
+    "graph:viz": "graphify export html",
+    "graph:callflow": "graphify export callflow-html",
+    "graph:tree": "graphify tree",
+    "graph:wiki": "graphify export wiki"
+  }
+}

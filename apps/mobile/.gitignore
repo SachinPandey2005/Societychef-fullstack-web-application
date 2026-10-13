@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+
+# Build & Expo Outputs
+.expo/
+.expo-shared/
+dist/
+web-build/
+expo-env.d.ts
+*.tsbuildinfo
+
+# Native Build Artifacts
+/ios/
+/android/
+android/app/build/
+android/build/
+ios/build/
+ios/Pods/
+ios/DerivedData/
+*.apk
+*.aab
+*.ipa
+
+# Native Keys & Certificates
+*.jks
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+
+# Secrets & Configuration Files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*
+!.env.example
+google-services.json
+GoogleService-Info.plist
+*firebase-adminsdk*.json
+*service-account*.json
+google-play-service-account.json
+
+# Metro & Bundler Caches
+.metro-health-check*
+.cache/
+
+# Logs & Debugging
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# OS & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

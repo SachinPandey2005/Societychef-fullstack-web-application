@@ -1,0 +1,19 @@
+-- Migration: 20260920000004_backfill_kitchens_is_live.sql
+-- Description: One-time backfill for public.kitchens.is_live.
+--
+-- The column defaults to `false` (see supabase/schema.sql), but nothing in
+-- the chef registration/onboarding flow ever set it, and the mobile app's
+-- kitchen-mapping function hardcoded `isLive: true` regardless of the real
+-- column value — so every existing kitchen has is_live = false in the
+-- database today, silently masked by that hardcode. The "Accepting orders /
+-- Paused" toggle on the chef dashboard is being wired to this column now (see
+-- apps/mobile/app/(chef)/dashboard.tsx and services/supabase/index.ts), and
+-- consumer-facing listings are being changed to respect it — without this
+-- backfill, that change would make every existing kitchen vanish from
+-- discovery the moment it ships, since they'd all read as paused.
+--
+-- This treats every kitchen that exists today as live (the same effective
+-- behavior the hardcoded `true` already gave them) and leaves the column's
+-- default at `false` for genuinely new rows going forward — new kitchens are
+-- set to `is_live = true` explicitly at creation time in the mobile app.
+UPDATE public.kitchens SET is_live = true WHERE is_live IS DISTINCT FROM true;

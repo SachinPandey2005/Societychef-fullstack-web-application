@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "router": {
+        "root": "apps/mobile/app"
+      },
+      "eas": {
+        "projectId": "d23f79af-52c3-423b-9429-c1e36d93746b"
+      }
+    }
+  }
+}

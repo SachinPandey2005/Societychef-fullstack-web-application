@@ -1,0 +1,36 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# EAS Build Ignore File - Society Chef Monorepo
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Dependencies (EAS handles install remotely)
+node_modules/
+
+# Local Native directories (prebuilt on EAS servers)
+android/
+ios/
+
+# Gradle Caches and Lock Files
+.gradle/
+**/.gradle/
+**/android/.gradle/
+**/android/build/
+**/android/app/build/
+**/ios/build/
+**/ios/Pods/
+build/
+dist/
+out/
+tmp/
+temp/
+*.tmp
+*.log
+
+# Expo caches
+.expo/
+.expo-shared/
+.cache/
+
+# Credentials & secrets (managed via EAS secrets / remote credentials)
+*.keystore
+*.jks
+google-play-service-account.json

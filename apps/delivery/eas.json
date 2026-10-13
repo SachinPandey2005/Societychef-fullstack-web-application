@@ -1,0 +1,56 @@
+{
+  "cli": {
+    "version": ">= 7.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://societychef-1.onrender.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://vpfnuomnocriemubjotd.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Cog0fOUpVDVEFpzhT5IRIw_tZRpk32y",
+        "EXPO_PUBLIC_DEV_PHONE_AUTH": "true"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://societychef-1.onrender.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://vpfnuomnocriemubjotd.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Cog0fOUpVDVEFpzhT5IRIw_tZRpk32y",
+        "EXPO_PUBLIC_DEV_PHONE_AUTH": "true"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://societychef-1.onrender.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://vpfnuomnocriemubjotd.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Cog0fOUpVDVEFpzhT5IRIw_tZRpk32y"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./google-play-service-account.json",
+        "track": "production"
+      }
+    }
+  }
+}
