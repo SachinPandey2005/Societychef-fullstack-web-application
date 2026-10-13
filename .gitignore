@@ -74,10 +74,19 @@ ios/DerivedData/
 *.sqlite3
 *.db
 
-# Testing Reports
+# Testing Reports & Artifacts
 playwright-report/
 test-results/
 coverage/
+cypress/videos/
+cypress/screenshots/
+.detox/
+
+# Build & Telemetry Configuration
+*sentry.properties
+
+# Scratch & Ad-Hoc Scripts
+scratch_*.js
 
 # OS-Specific Metadata
 .DS_Store
